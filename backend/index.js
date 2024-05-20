@@ -9,16 +9,16 @@ const app = express();
 // middleware for parsing request body
 app.use(express.json());
 
-// app.use(cors()); // permission to connect another domain
+app.use(cors()); // permission to connect another domain
 
-app.use(
-  cors({
-    origin: "https://book-collection-fe.vercel.app/",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type"],
+//     credentials: true,
+//   })
+// );
 
 // when visit /, response with hello world
 app.get("/", (request, response) => {
