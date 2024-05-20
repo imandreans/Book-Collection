@@ -16,6 +16,7 @@ app.use(cors()); // permission to connect another domain
 //     origin: "http://localhost:3000",
 //     methods: ["GET", "POST", "PUT", "DELETE"],
 //     allowedHeaders: ["Content-Type"],
+//     credentials: true,
 //   })
 // );
 
