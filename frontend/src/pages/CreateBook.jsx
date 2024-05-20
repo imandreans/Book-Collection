@@ -27,7 +27,7 @@ const CreateBook = () => {
     };
     setLoading(true);
     axios
-      .post("http://localhost:5555/books", data)
+      .post("https://book-collection-gamma.vercel.app/books", data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book Created Succesfully", { variant: "success" });
