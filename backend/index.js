@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://book-collection-gamma.vercel.app/",
+    origin: "https://book-collection-fe.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
