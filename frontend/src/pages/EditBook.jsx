@@ -20,7 +20,7 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://book-collection-gamma.vercel.app/books${id}`)
+      .get(`https://book-collection-gamma.vercel.app/books/${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setPublishYear(response.data.publishYear);
