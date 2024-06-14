@@ -20,8 +20,9 @@ router.post("/login", async (request, response) => {
     const token = jwt.sign({ id: user._id }, "secret");
 
     response.json({ token, userID: user._id });
-  } catch (err) {
-    response.status(500).json({ type: err });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ type: error });
   }
 });
 
@@ -37,7 +38,7 @@ router.post("/register", async (request, response) => {
     await newUser.save();
     response.json({ message: "User Registered Succesfully" });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     response.status(500).send({ message: error.message });
   }
 });
