@@ -24,7 +24,7 @@ const Home = () => {
     //run code inside when home is running
     setLoading(true);
     axios
-      .get("https://book-collection-gamma.vercel.app/books") // axios contains HTTP Methods
+      .get("https://book-collection-nu.vercel.app/books") // axios contains HTTP Methods
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);
