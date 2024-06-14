@@ -70,7 +70,6 @@ const Home = () => {
             <Button
               variant="contained"
               color="secondary"
-              onClick={logout}
             >
               LOGIN
             </Button>
