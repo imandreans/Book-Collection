@@ -65,16 +65,7 @@ const Home = () => {
         >
           Card
         </Button>
-        {!isAuthenticated ? (
-          <Link to={"/login"}>
-            <Button
-              variant="contained"
-              color="secondary"
-            >
-              LOGIN
-            </Button>
-          </Link>
-        ) : (
+        {isAuthenticated ? (
           <Link to={"/"}>
             <Button
               variant="contained"
@@ -82,6 +73,15 @@ const Home = () => {
               onClick={logout}
             >
               LOGOUT
+            </Button>
+          </Link>
+        ) : (
+          <Link to={"/login"}>
+            <Button
+              variant="contained"
+              color="secondary"
+            >
+              LOGIN
             </Button>
           </Link>
         )}
