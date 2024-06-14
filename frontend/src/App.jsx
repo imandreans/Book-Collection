@@ -5,14 +5,20 @@ import CreateBook from "./pages/CreateBook";
 import DeleteBook from "./pages/DeleteBook";
 import EditBook from "./pages/EditBook";
 import ShowBook from "./pages/ShowBook";
-
+import Login from "./pages/Login";
+import HomeAdmin from "./pages/Home";
 const App = () => {
   return (
     <Routes>
       <Route
+        path="/login"
+        element={<Login />}
+      />
+      <Route
         path="/"
         element={<Home />}
       />
+
       <Route
         path="/books/create"
         element={<CreateBook />}

@@ -38,7 +38,7 @@ const Home = () => {
         alignItems="center"
         padding={2}
         width={"100%"}
-        className="shadow-lg"
+        className=" flex shadow-lg"
       >
         <div className="font-bold text-white pl-6">
           <h1>Choose View</h1>
@@ -59,6 +59,14 @@ const Home = () => {
         >
           Card
         </Button>
+        <Link to={"/"}>
+          <Button
+            variant="contained"
+            color="secondary"
+          >
+            LOGOUT
+          </Button>
+        </Link>
       </Stack>
       <div className="p-10">
         <h1 className="text-2xl">Feel Free to add your favorite book!</h1>
