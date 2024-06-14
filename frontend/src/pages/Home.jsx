@@ -65,7 +65,7 @@ const Home = () => {
         >
           Card
         </Button>
-        {!isAuthenticated ? (
+        {isAuthenticated ? (
           <Link to={"/"}>
             <Button
               variant="contained"
