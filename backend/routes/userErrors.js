@@ -1,4 +1,5 @@
-const userErrors = Object.freeze({
+export const userErrors = Object.freeze({
   NO_USER_FOUND: "no-user-found",
-  WRONG_CREDENTIALS: "Wrong username/password combination",
+  WRONG_CREDENTIALS: "Wrong-username/password-combination",
+  USER_ALREADY_EXIST: "user-already-exist",
 });
