@@ -10,7 +10,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useContext } from "react";
+import { BookContext } from "../../context/book-context";
+
 const BooksTable = ({ books }) => {
+  const { isAuthenticated, setAuthenticated } = useContext(BookContext);
+
   return (
     <TableContainer component={Paper}>
       <Table
@@ -22,7 +27,7 @@ const BooksTable = ({ books }) => {
             <TableCell>Title</TableCell>
             <TableCell align="right">Author</TableCell>
             <TableCell align="right">Publish Year</TableCell>
-            <TableCell align="right">Operations</TableCell>
+            {isAuthenticated && <TableCell align="right">Operations</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,19 +44,21 @@ const BooksTable = ({ books }) => {
               </TableCell>
               <TableCell align="right">{book.author}</TableCell>
               <TableCell align="right">{book.publishYear}</TableCell>
-              <TableCell align="right">
-                <div className="flex justify-center gap-x-4 ">
-                  <Link to={`/books/details/${book._id}`}>
-                    <InfoIcon className=" text-green-500 hover:text-green-600" />
-                  </Link>
-                  <Link to={`/books/edit/${book._id}`}>
-                    <EditIcon className=" text-yellow-500 hover:text-yellow-600" />
-                  </Link>
-                  <Link to={`/books/delete/${book._id}`}>
-                    <DeleteIcon className=" text-red-500 hover:text-red-600" />
-                  </Link>
-                </div>
-              </TableCell>
+              {isAuthenticated && (
+                <TableCell align="right">
+                  <div className="flex justify-center gap-x-4 ">
+                    <Link to={`/books/details/${book._id}`}>
+                      <InfoIcon className=" text-green-500 hover:text-green-600" />
+                    </Link>
+                    <Link to={`/books/edit/${book._id}`}>
+                      <EditIcon className=" text-yellow-500 hover:text-yellow-600" />
+                    </Link>
+                    <Link to={`/books/delete/${book._id}`}>
+                      <DeleteIcon className=" text-red-500 hover:text-red-600" />
+                    </Link>
+                  </div>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

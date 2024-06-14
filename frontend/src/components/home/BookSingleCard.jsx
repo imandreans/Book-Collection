@@ -8,8 +8,12 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import BookModal from "./BookModal";
 import { Box, Button, Divider, Grid } from "@mui/material";
+import { useContext } from "react";
+import { BookContext } from "../../context/book-context";
 
 const BookSingleCard = ({ item }) => {
+  const { isAuthenticated } = useContext(BookContext);
+
   const [showModal, setShowModal] = useState(false);
   return (
     <Box
@@ -57,30 +61,35 @@ const BookSingleCard = ({ item }) => {
           >
             Show
           </Button>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-          />
-          <Link to={`/books/details/${item._id}`}>
-            <InfoRoundedIcon className="text-2xl text-green-500 hover:text-green-600" />
-          </Link>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-          />
-          <Link to={`/books/edit/${item._id}`}>
-            <EditRoundedIcon className="text-2xl text-yellow-500 hover:text-yellow-600" />
-          </Link>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-          />
-          <Link to={`/books/delete/${item._id}`}>
-            <DeleteRoundedIcon className="text-2xl text-red-500 hover:text-red-600" />
-          </Link>
+          {isAuthenticated && (
+            <>
+              <Divider
+                orientation="vertical"
+                variant="middle"
+                flexItem
+              />
+
+              <Link to={`/books/details/${item._id}`}>
+                <InfoRoundedIcon className="text-2xl text-green-500 hover:text-green-600" />
+              </Link>
+              <Divider
+                orientation="vertical"
+                variant="middle"
+                flexItem
+              />
+              <Link to={`/books/edit/${item._id}`}>
+                <EditRoundedIcon className="text-2xl text-yellow-500 hover:text-yellow-600" />
+              </Link>
+              <Divider
+                orientation="vertical"
+                variant="middle"
+                flexItem
+              />
+              <Link to={`/books/delete/${item._id}`}>
+                <DeleteRoundedIcon className="text-2xl text-red-500 hover:text-red-600" />
+              </Link>
+            </>
+          )}
         </Grid>
       </Grid>
       {showModal && (

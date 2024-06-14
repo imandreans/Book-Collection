@@ -3,7 +3,7 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import booksRoute from "./routes/bookRoutes.js";
 import cors from "cors";
-
+import userRouter from "./routes/userRoutes.js";
 const app = express();
 
 // middleware for parsing request body
@@ -28,6 +28,7 @@ app.get("/", (request, response) => {
 
 // use /books to access booksRoute. booksRoute contains route of http method for book database
 app.use("/books", booksRoute);
+app.use("/user", userRouter);
 
 //connect to database
 mongoose
