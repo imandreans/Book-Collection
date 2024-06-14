@@ -16,7 +16,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:5555/user/login", { username, password });
+      const result = await axios.post("https://book-collection-nu.vercel.app/user/login", { username, password });
 
       setCookies("access_token", result.data.token);
       localStorage.setItem("userID", result.data.userID);
