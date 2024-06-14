@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export const IBookContext = {
@@ -9,7 +8,7 @@ export const IBookContext = {
 
 const defaultVal = {
   isAuthenticated: false,
-  setAuthenticated: () => {},
+  setAuthenticated: () => null,
 };
 
 export const BookContext = createContext(defaultVal);
