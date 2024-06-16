@@ -44,19 +44,19 @@ router.post("/register", async (request, response) => {
   }
 });
 
-export const verifyToken = (request, response, NextFunction) => {
-  const authHeader = request.headers.authorization;
+// export const verifyToken = (request, response, NextFunction) => {
+//   const authHeader = request.headers.authorization;
 
-  if (authHeader) {
-    jwt.verify(authHeader, "secret", (err) => {
-      if (err) {
-        return response.sendStatus(403);
-      }
-      NextFunction();
-    });
-  } else {
-    response.sendStatus(401);
-  }
-};
+//   if (authHeader) {
+//     jwt.verify(authHeader, "secret", (err) => {
+//       if (err) {
+//         return response.sendStatus(403);
+//       }
+//       NextFunction();
+//     });
+//   } else {
+//     response.sendStatus(401);
+//   }
+// };
 
 export default router;
