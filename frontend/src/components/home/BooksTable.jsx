@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { BookContext } from "../../context/book-context";
 
 const BooksTable = ({ books }) => {
-  const { isNotAuthenticated, setAuthenticated } = useContext(BookContext);
+  const { isAuthenticated, setAuthenticated } = useContext(BookContext);
 
   return (
     <TableContainer component={Paper}>
@@ -27,7 +27,7 @@ const BooksTable = ({ books }) => {
             <TableCell>Title</TableCell>
             <TableCell align="right">Author</TableCell>
             <TableCell align="right">Publish Year</TableCell>
-            {isNotAuthenticated && <TableCell align="right">Operations</TableCell>}
+            {isAuthenticated && <TableCell align="right">Operations</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -44,7 +44,7 @@ const BooksTable = ({ books }) => {
               </TableCell>
               <TableCell align="right">{book.author}</TableCell>
               <TableCell align="right">{book.publishYear}</TableCell>
-              {isNotAuthenticated && (
+              {isAuthenticated && (
                 <TableCell align="right">
                   <div className="flex justify-center gap-x-4 ">
                     <Link to={`/books/details/${book._id}`}>

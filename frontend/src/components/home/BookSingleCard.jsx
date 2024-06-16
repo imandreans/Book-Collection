@@ -12,7 +12,7 @@ import { useContext } from "react";
 import { BookContext } from "../../context/book-context";
 
 const BookSingleCard = ({ item }) => {
-  const { isNotAuthenticated } = useContext(BookContext);
+  const { isAuthenticated } = useContext(BookContext);
 
   const [showModal, setShowModal] = useState(false);
   return (
@@ -61,7 +61,7 @@ const BookSingleCard = ({ item }) => {
           >
             Show
           </Button>
-          {isNotAuthenticated && (
+          {isAuthenticated && (
             <>
               <Divider
                 orientation="vertical"
