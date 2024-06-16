@@ -8,19 +8,19 @@ export const IBookContext = {
 
 const defaultVal = {
   isAuthenticated: false,
-  setAuthenticated: () => null,
+  setAuthenticated: () => undefined,
 };
 
 export const BookContext = createContext(defaultVal);
 export const BookContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [isAuthenticated, setAuthenticated] = useState(cookies.access_token !== "undefined");
+  const [isAuthenticated, setAuthenticated] = useState(cookies.access_token !== undefined);
   console.log("auth " + isAuthenticated);
   console.log("access_token " + cookies.access_token);
   useEffect(() => {
     if (!isAuthenticated) {
       localStorage.clear();
-      setCookies("access_token", "undefined");
+      setCookies("access_token", undefined);
     }
   }, [isAuthenticated]);
   const contextValue = { isAuthenticated, setAuthenticated };
