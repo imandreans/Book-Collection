@@ -15,7 +15,7 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("table");
-  const { isAuthenticated, setAuthenticated } = useContext(BookContext);
+  const { isNotAuthenticated, setAuthenticated } = useContext(BookContext);
   const logout = () => {
     setAuthenticated(false);
   };
@@ -65,7 +65,7 @@ const Home = () => {
         >
           Card
         </Button>
-        {isAuthenticated ? (
+        {isNotAuthenticated ? (
           <Link to={"/"}>
             <Button
               variant="contained"
@@ -90,7 +90,7 @@ const Home = () => {
         <h1 className="text-2xl">Feel Free to add your favorite book!</h1>
         <div className="flex justify-between items-center">
           <h1 className="text-3xl my-8">Book Collection</h1>
-          {isAuthenticated && (
+          {isNotAuthenticated && (
             <Link to="/books/create">
               <Button
                 variant="contained"

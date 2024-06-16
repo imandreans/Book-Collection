@@ -2,27 +2,27 @@ import React, { createContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 export const IBookContext = {
-  isAuthenticated: Boolean,
-  setAuthenticated: function (isAuthenticated) {},
+  isNotAuthenticated: Boolean,
+  setAuthenticated: function (isNotAuthenticated) {},
 };
 
 const defaultVal = {
-  isAuthenticated: false,
+  isNotAuthenticated: false,
   setAuthenticated: () => null,
 };
 
 export const BookContext = createContext(defaultVal);
 export const BookContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [isAuthenticated, setAuthenticated] = useState(cookies.access_token === undefined);
-  console.log("auth " + isAuthenticated);
+  const [isNotAuthenticated, setAuthenticated] = useState(cookies.access_token === undefined);
+  console.log("auth " + isNotAuthenticated);
   console.log("access_token " + cookies.access_token);
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isNotAuthenticated) {
       localStorage.clear();
       setCookies("access_token", undefined);
     }
-  }, [isAuthenticated]);
-  const contextValue = { isAuthenticated, setAuthenticated };
+  }, [isNotAuthenticated]);
+  const contextValue = { isNotAuthenticated, setAuthenticated };
   return <BookContext.Provider value={contextValue}>{props.children}</BookContext.Provider>;
 };
