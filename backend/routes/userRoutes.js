@@ -1,8 +1,9 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import { User } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import { UserErrors } from "./userErrors.js";
 import bcrypt from "bcryptjs";
+
 const router = express.Router();
 
 router.post("/login", async (request, response) => {
@@ -42,5 +43,20 @@ router.post("/register", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+export const verifyToken = (request, response, NextFunction) => {
+  const authHeader = request.headers.authorization;
+
+  if (authHeader) {
+    jwt.verify(authHeader, "secret", (err) => {
+      if (err) {
+        return response.sendStatus(403);
+      }
+      NextFunction();
+    });
+  } else {
+    response.sendStatus(401);
+  }
+};
 
 export default router;

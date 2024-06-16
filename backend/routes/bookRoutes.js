@@ -1,9 +1,10 @@
 import express from "express";
 import { Book } from "../models/bookModel.js";
+import { verifyToken } from "./userRoutes.js";
 
 const router = express.Router();
 //Create book
-router.post("/", async (request, response) => {
+router.post("/", verifyToken, async (request, response) => {
   try {
     if (!request.body.title || !request.body.author || !request.body.publishYear || !request.body.synopsis) {
       return response.status(400).send({
@@ -42,7 +43,7 @@ router.get("/", async (request, response) => {
 });
 
 //Show book
-router.get("/:id", async (request, response) => {
+router.get("/:id", verifyToken, async (request, response) => {
   try {
     const { id } = request.params;
     const book = await Book.findById(id);
@@ -54,7 +55,7 @@ router.get("/:id", async (request, response) => {
 });
 
 //edit book
-router.put("/:id", async (request, response) => {
+router.put("/:id", verifyToken, async (request, response) => {
   try {
     if (!request.body.title || !request.body.author || !request.body.publishYear || !request.body.synopsis) {
       return response.status(400).send({
@@ -75,7 +76,7 @@ router.put("/:id", async (request, response) => {
 });
 
 //delete book
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", verifyToken, async (request, response) => {
   try {
     const { id } = request.params;
     const result = await Book.findByIdAndDelete(id);
