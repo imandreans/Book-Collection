@@ -43,7 +43,7 @@ router.get("/", async (request, response) => {
 });
 
 //Show book
-router.get("/:id", verifyToken, async (request, response) => {
+router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
     const book = await Book.findById(id);
