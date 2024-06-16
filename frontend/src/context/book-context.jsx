@@ -14,9 +14,9 @@ const defaultVal = {
 export const BookContext = createContext(defaultVal);
 export const BookContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [isAuthenticated, setAuthenticated] = useState(cookies.access_token !== undefined);
+  const [isAuthenticated, setAuthenticated] = useState(cookies.access_token === undefined);
   useEffect(() => {
-    if (isAuthenticated == false) {
+    if (!isAuthenticated) {
       localStorage.clear();
       setCookies("access_token", undefined);
     }
