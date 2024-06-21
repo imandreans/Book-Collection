@@ -19,7 +19,8 @@ export const BookContextProvider = (props) => {
   // console.log(cookies.access_token !== undefined);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    // window.location.reload;
+    if (isAuthenticated) {
       console.log("masuk");
       localStorage.clear();
       setCookies("access_token", undefined);
