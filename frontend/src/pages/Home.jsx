@@ -10,15 +10,12 @@ import Stack from "@mui/material/Stack";
 import TableViewRoundedIcon from "@mui/icons-material/TableViewRounded";
 import ViewAgendaRoundedIcon from "@mui/icons-material/ViewAgendaRounded";
 import { BookContext } from "../context/book-context";
-
+import Navbar from "../components/Navbar";
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("table");
   const { isAuthenticated, setAuthenticated } = useContext(BookContext);
-  const logout = () => {
-    setAuthenticated(false);
-  };
 
   useEffect(() => {
     //run code inside when home is running
@@ -37,59 +34,30 @@ const Home = () => {
 
   return (
     <>
-      <Stack
-        direction="row"
-        spacing={4}
-        bgcolor={"#6E88E5"}
-        alignItems="center"
-        padding={2}
-        width={"100%"}
-        className=" flex shadow-lg"
-      >
-        <div className="font-bold text-white pl-6">
-          <h1>Choose View</h1>
-        </div>
-        <Button
-          variant="contained"
-          onClick={() => setShowType("table")}
-          color="inherit"
-          startIcon={<TableViewRoundedIcon />}
-        >
-          Table
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => setShowType("card")}
-          color="inherit"
-          startIcon={<ViewAgendaRoundedIcon />}
-        >
-          Card
-        </Button>
-        {isAuthenticated ? (
-          <Link to={"/"}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={logout}
-            >
-              LOGOUT
-            </Button>
-          </Link>
-        ) : (
-          <Link to={"/login"}>
-            <Button
-              variant="contained"
-              color="secondary"
-            >
-              LOGIN
-            </Button>
-          </Link>
-        )}
-      </Stack>
+      <Navbar />
+
       <div className="p-10">
-        <h1 className="text-2xl">Feel Free to add your favorite book!</h1>
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl my-8">Book Collection</h1>
+        {isAuthenticated ? <h1 className="text-2xl">Feel Free to add your favorite book!</h1> : <h1 className="text-2xl">Feel free to explore my book collection!</h1>}
+        <div className="flex justify-between items-center mb-6 mt-6">
+          <div className="flex gap-6">
+            {/* <h1 className="self-center">View</h1> */}
+            <Button
+              variant="outlined"
+              onClick={() => setShowType("table")}
+              color="inherit"
+              startIcon={<TableViewRoundedIcon />}
+            >
+              Table
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setShowType("card")}
+              color="inherit"
+              startIcon={<ViewAgendaRoundedIcon />}
+            >
+              Card
+            </Button>
+          </div>
           {isAuthenticated && (
             <Link to="/books/create">
               <Button

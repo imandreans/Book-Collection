@@ -7,17 +7,34 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import BookModal from "./BookModal";
-import { Box, Button, Divider, Grid } from "@mui/material";
+import { Box, Button, Divider, Grid, createTheme } from "@mui/material";
 import { useContext } from "react";
 import { BookContext } from "../../context/book-context";
 
 const BookSingleCard = ({ item }) => {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#757ce8",
+        main: "#2196f3",
+        dark: "#0d47a1",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#ff7961",
+        main: "#f44336",
+        dark: "#ba000d",
+        contrastText: "#000",
+      },
+    },
+  });
+
   const { isAuthenticated } = useContext(BookContext);
 
   const [showModal, setShowModal] = useState(false);
   return (
     <Box
-      className="shadow-xl p-4 rounded-xl"
+      className="shadow-md p-4 rounded-xl"
       m={1}
     >
       <Grid
@@ -34,11 +51,8 @@ const BookSingleCard = ({ item }) => {
           <ImportContactsRoundedIcon />
           <h2>{item.title}</h2>
         </Grid>
-        <Grid
-          item
-          display={"flex"}
-        >
-          <div className="px-4 py-1 bg-blue-600 rounded-md text-white absolute">{item.publishYear}</div>
+        <Grid item>
+          <div className="px-4 py-1  bg-stone-500 rounded-md text-white absolute ">{item.publishYear}</div>
         </Grid>
         <Grid
           item
