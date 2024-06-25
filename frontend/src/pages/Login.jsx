@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { BookContext } from "../context/book-context";
 import { userErrors } from "./userErrors.js";
 import axios from "axios";
-
+import { TextField } from "@mui/material";
+import { Typography } from "@mui/material";
+import { theme } from "../Theme.ts";
+import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar.jsx";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,47 +44,59 @@ const Login = () => {
     }
   };
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <h1>Silahkan Login</h1>
-        <form
-          className="flex flex-col gap-4"
-          onSubmit={handleSubmit}
-          // action="#"
-          // method="POST"
+    <>
+      <Navbar />
+
+      <main className="flex justify-center items-center h-screen">
+        <Paper
+          sx={{ height: "320px", width: "440px" }}
+          className="flex flex-col p-10 rounded-md text-white"
         >
-          <div className="flex flex-col">
-            <label htmlFor="username">Username</label>
-            <input
+          <Typography
+            variant="h4"
+            mb={2}
+          >
+            Login
+          </Typography>
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={handleSubmit}
+            // action="#"
+            // method="POST"
+          >
+            <TextField
               type="text"
-              name="username"
+              label="username"
               required
               onChange={(e) => setUsername(e.target.value)}
-              className="rounded-md border-2 border-sky-950 w-64 p-1.5 sm:text-sm mt-1"
             />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="password">Password</label>
-            <input
+            <TextField
               type="password"
-              text="password"
+              label="password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="block rounded-md border-2 border-sky-950 p-1.5 sm:text-sm mt-1"
             />
-          </div>
-          <Button
-            type="submit"
-            variant="contained"
-            className="w-64"
-          >
-            Login
-          </Button>
-        </form>
-        <a href="/">Go back</a>
-      </div>
-    </div>
+            <section className="flex justify-between items-center">
+              <Button
+                theme={theme}
+                type="submit"
+                variant="contained"
+                className="w-1/6"
+              >
+                Login
+              </Button>
+              <Link
+                to="/"
+                className="hover:text-red-500"
+              >
+                Go back
+              </Link>
+            </section>
+          </form>
+        </Paper>
+      </main>
+    </>
   );
 };
 

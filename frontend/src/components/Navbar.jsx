@@ -3,6 +3,7 @@ import React from "react";
 import { BookContext } from "../context/book-context";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { theme } from "../Theme";
 
 const Navbar = () => {
   const { isAuthenticated, setAuthenticated } = useContext(BookContext);
@@ -15,6 +16,7 @@ const Navbar = () => {
       {isAuthenticated ? (
         <Link to={"/"}>
           <Button
+            theme={theme}
             variant="contained"
             onClick={logout}
           >
@@ -23,7 +25,12 @@ const Navbar = () => {
         </Link>
       ) : (
         <Link to={"/login"}>
-          <Button variant="contained">LOGIN</Button>
+          <Button
+            theme={theme}
+            variant="contained"
+          >
+            LOGIN
+          </Button>
         </Link>
       )}
     </nav>

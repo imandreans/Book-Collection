@@ -1,118 +1,66 @@
 import { Link } from "react-router-dom";
-import ImportContactsRoundedIcon from "@mui/icons-material/ImportContactsRounded";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import BookModal from "./BookModal";
-import { Box, Button, Divider, Grid, createTheme } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import { Button, Card, Divider, createTheme } from "@mui/material";
 import { useContext } from "react";
 import { BookContext } from "../../context/book-context";
-
+import Typography from "@mui/material/Typography";
+import { theme } from "../../Theme";
 const BookSingleCard = ({ item }) => {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        light: "#757ce8",
-        main: "#2196f3",
-        dark: "#0d47a1",
-        contrastText: "#fff",
-      },
-      secondary: {
-        light: "#ff7961",
-        main: "#f44336",
-        dark: "#ba000d",
-        contrastText: "#000",
-      },
-    },
-  });
-
   const { isAuthenticated } = useContext(BookContext);
 
   const [showModal, setShowModal] = useState(false);
   return (
-    <Box
-      className="shadow-md p-4 rounded-xl"
-      m={1}
-    >
-      <Grid
-        container
-        rowGap={2}
-      >
-        <Grid
-          item
-          xs={10}
-          display={"flex"}
-          alignItems="center"
-          gap={1}
+    <Card sx={{ width: 300, height: 150, backgroundColor: "#f5f5f5" }}>
+      <CardContent>
+        <Typography
+          sx={{ fontSize: 14 }}
+          color="text.secondary"
+          gutterBottom
         >
-          <ImportContactsRoundedIcon />
-          <h2>{item.title}</h2>
-        </Grid>
-        <Grid item>
-          <div className="px-4 py-1  bg-stone-500 rounded-md text-white absolute ">{item.publishYear}</div>
-        </Grid>
-        <Grid
-          item
-          display={"flex"}
-          gap={1}
+          {item.publishYear} {"•"} {item.author}
+        </Typography>
+        <Typography sx={{ fontSize: 20 }}>{item.title}</Typography>
+      </CardContent>
+      <CardActions sx={{ display: "flex", justifyContent: "space-evenly" }}>
+        <Button
+          variant="contained"
+          // startIcon={<VisibilityIcon />}
+          onClick={() => setShowModal(true)}
+          theme={theme}
         >
-          <AccountCircleIcon />
-          <h2>{item.author}</h2>
-        </Grid>
-        <Grid
-          container
-          columnGap={4}
-          justifyContent="flex-start"
-          alignItems="center"
-        >
-          <Button
-            variant="contained"
-            startIcon={<VisibilityIcon />}
-            onClick={() => setShowModal(true)}
-          >
-            Show
-          </Button>
-          {isAuthenticated && (
-            <>
-              <Divider
-                orientation="vertical"
-                variant="middle"
-                flexItem
-              />
+          Desc
+        </Button>
+        {isAuthenticated && (
+          <>
+            <Link to={`/books/details/${item._id}`}>
+              <InfoRoundedIcon className="text-2xl text-green-600 hover:text-green-500" />
+            </Link>
 
-              <Link to={`/books/details/${item._id}`}>
-                <InfoRoundedIcon className="text-2xl text-green-500 hover:text-green-600" />
-              </Link>
-              <Divider
-                orientation="vertical"
-                variant="middle"
-                flexItem
-              />
-              <Link to={`/books/edit/${item._id}`}>
-                <EditRoundedIcon className="text-2xl text-yellow-500 hover:text-yellow-600" />
-              </Link>
-              <Divider
-                orientation="vertical"
-                variant="middle"
-                flexItem
-              />
-              <Link to={`/books/delete/${item._id}`}>
-                <DeleteRoundedIcon className="text-2xl text-red-500 hover:text-red-600" />
-              </Link>
-            </>
-          )}
-        </Grid>
-      </Grid>
-      {showModal && (
-        <BookModal
-          book={item}
-          onClose={() => setShowModal(false)}
-        />
-      )}
-    </Box>
+            <Link to={`/books/edit/${item._id}`}>
+              <EditRoundedIcon className="text-2xl text-yellow-600 hover:text-yellow-500" />
+            </Link>
+
+            <Link to={`/books/delete/${item._id}`}>
+              <DeleteRoundedIcon className="text-2xl text-red-600 hover:text-red-500" />
+            </Link>
+          </>
+        )}
+        {showModal && (
+          <BookModal
+            book={item}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+      </CardActions>
+    </Card>
   );
 };
 

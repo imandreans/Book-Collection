@@ -2,19 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Button from "@mui/material/Button";
+import { theme } from "../Theme";
 const BackButton = ({ destination = "/" }) => {
   return (
-    <div className="flex">
+    <>
       <Link to={destination}>
         <Button
           variant="contained"
           startIcon={<ArrowBackIcon />}
+          theme={theme}
         >
-          {" "}
           Back
         </Button>
       </Link>
-    </div>
+    </>
   );
 };
 

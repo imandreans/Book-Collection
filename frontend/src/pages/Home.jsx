@@ -6,11 +6,14 @@ import BooksCard from "../components/home/BooksCard";
 import BooksTable from "../components/home/BooksTable";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
 import TableViewRoundedIcon from "@mui/icons-material/TableViewRounded";
 import ViewAgendaRoundedIcon from "@mui/icons-material/ViewAgendaRounded";
 import { BookContext } from "../context/book-context";
 import Navbar from "../components/Navbar";
+import { outlinedTheme, theme } from "../Theme";
+import { Typography } from "@mui/material";
+
+theme;
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,22 +40,22 @@ const Home = () => {
       <Navbar />
 
       <div className="p-10">
-        {isAuthenticated ? <h1 className="text-2xl">Feel Free to add your favorite book!</h1> : <h1 className="text-2xl">Feel free to explore my book collection!</h1>}
+        {isAuthenticated ? <Typography variant={"h4"}>Feel Free to add your favorite book!</Typography> : <Typography variant={"h4"}>Feel free to explore my book collection!</Typography>}
         <div className="flex justify-between items-center mb-6 mt-6">
           <div className="flex gap-6">
             {/* <h1 className="self-center">View</h1> */}
             <Button
+              theme={outlinedTheme}
               variant="outlined"
               onClick={() => setShowType("table")}
-              color="inherit"
               startIcon={<TableViewRoundedIcon />}
             >
               Table
             </Button>
             <Button
+              theme={outlinedTheme}
               variant="outlined"
               onClick={() => setShowType("card")}
-              color="inherit"
               startIcon={<ViewAgendaRoundedIcon />}
             >
               Card
@@ -61,6 +64,7 @@ const Home = () => {
           {isAuthenticated && (
             <Link to="/books/create">
               <Button
+                theme={theme}
                 variant="contained"
                 startIcon={<AddCircleRoundedIcon />}
               >

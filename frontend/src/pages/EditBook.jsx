@@ -3,6 +3,7 @@ import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import Box from "@mui/material/Box";
+import { theme } from "../Theme";
 
 import { useNavigate, useParams } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -20,7 +21,7 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://book-collection-gamma.vercel.app/books/${id}`)
+      .get(`https://book-collection-nu.vercel.app/books/${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setPublishYear(response.data.publishYear);
@@ -44,7 +45,7 @@ const EditBook = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/books/${id}`, data)
+      .put(`https://book-collection-nu.vercel.app/books/${id}`, data)
       .then(() => {
         setLoading(false);
         navigate("/");
@@ -102,6 +103,7 @@ const EditBook = () => {
           />
         </Box>
         <Button
+          theme={theme}
           variant="contained"
           size="large"
           onClick={handleEditBook}

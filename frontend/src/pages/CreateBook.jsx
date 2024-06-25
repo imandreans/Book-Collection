@@ -7,6 +7,7 @@ import { useSnackbar } from "notistack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { theme } from "../Theme";
 
 const CreateBook = () => {
   const [title, setTitle] = useState("");
@@ -27,7 +28,7 @@ const CreateBook = () => {
     };
     setLoading(true);
     axios
-      .post("https://book-collection-gamma.vercel.app/books", data)
+      .post("https://book-collection-nu.vercel.app/books", data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book Created Succesfully", { variant: "success" });
@@ -79,7 +80,7 @@ const CreateBook = () => {
           <TextField
             required
             id="outlined-multiline-static"
-            label="Synopsis"
+            label="Description"
             multiline
             rows={4}
             value={synopsis}
@@ -87,6 +88,7 @@ const CreateBook = () => {
           />
         </Box>
         <Button
+          theme={theme}
           variant="contained"
           size="large"
           onClick={handleSaveBook}
