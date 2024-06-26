@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import { theme } from "../Theme";
+import { Typography } from "@mui/material";
 
 import { useNavigate, useParams } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -57,9 +58,16 @@ const EditBook = () => {
       });
   };
   return (
-    <div className="p-4">
-      <BackButton />
-      <h1 className="text-3xl my-4">Edit Book</h1>
+    <>
+      <div className="flex ">
+        <BackButton />
+        <Typography
+          variant="h5"
+          className="self-center"
+        >
+          Edit Book
+        </Typography>
+      </div>
       {loading ? <Spinner /> : ""}
       <div className="flex flex-col shadow-xl rounded-xl w-[600px] p-4 mx-auto">
         <Box
@@ -111,7 +119,7 @@ const EditBook = () => {
           Save
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

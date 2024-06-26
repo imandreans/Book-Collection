@@ -47,7 +47,7 @@ const Login = () => {
     <>
       <Navbar />
 
-      <main className="flex justify-center items-center h-screen">
+      <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <Paper
           sx={{ height: "320px", width: "440px" }}
           className="flex flex-col p-10 rounded-md text-white"

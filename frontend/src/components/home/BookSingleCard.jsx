@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import BookModal from "./BookModal";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import { Button, Card, Divider, createTheme } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { useContext } from "react";
 import { BookContext } from "../../context/book-context";
 import Typography from "@mui/material/Typography";
 import { theme } from "../../Theme";
+
 const BookSingleCard = ({ item }) => {
   const { isAuthenticated } = useContext(BookContext);
 
@@ -53,12 +53,11 @@ const BookSingleCard = ({ item }) => {
             </Link>
           </>
         )}
-        {showModal && (
-          <BookModal
-            book={item}
-            onClose={() => setShowModal(false)}
-          />
-        )}
+        <BookModal
+          open={showModal}
+          book={item}
+          onClose={() => setShowModal(false)}
+        />
       </CardActions>
     </Card>
   );

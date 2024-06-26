@@ -1,40 +1,43 @@
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import ImportContactsRoundedIcon from "@mui/icons-material/ImportContactsRounded";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Divider from "@mui/material/Divider";
+import { Modal, Box, Typography } from "@mui/material";
 
-const BookModal = ({ book, onClose }) => {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  maxHeight: 400,
+  bgcolor: "background.paper",
+  overflowY: "scroll",
+  // border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+const BookModal = ({ book, onClose, open }) => {
   return (
-    <div
-      className="fixed bg-black bg-opacity-75 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center"
-      onClick={onClose}
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
     >
-      <div
-        onClick={(event) => event.stopPropagation()}
-        className="w-[600px] max-w-full h-[400px] bg-white rounded-xl p-4 flex flex-col relative space-y-2"
-      >
-        <CloseRoundedIcon
-          className="absolute right-6 top-6 text-3xl text-red-600 cursor-pointer"
-          onClick={onClose}
-        />
-        <h2 className="w-fit px-4 py-1 bg-blue-600 rounded-lg text-white">{book.publishYear}</h2>
-        {/* <h4 className="my-2 text-gray-400">{book._id}</h4> */}
-        <div className="flex justify-between pr-1 pl-1">
-          <div className="flex justify-start items-center">
-            <ImportContactsRoundedIcon className="text-2xl mr-1" />
-            <h2 className="my-1">{book.title}</h2>
-          </div>
-          <div className="flex justify-start items-center">
-            <AccountCircleIcon className="text-2xl mr-1" />
-            <h2 className="my-1">{book.author}</h2>
-          </div>
-        </div>
-        <Divider />
-        <div style={{ overflow: "auto" }}>
-          <p style={{ whiteSpace: "pre-wrap" }}>{book.synopsis}</p>
-        </div>
-      </div>
-    </div>
+      <Box sx={style}>
+        <Typography
+          id="modal-modal-title"
+          variant="h6"
+          component="h2"
+          // sx={{ position: "sticky", top: 0, bgcolor: "background.paper" }}
+        >
+          {book.title}
+        </Typography>
+        <Typography
+          id="modal-modal-description"
+          sx={{ mt: 2, whiteSpace: "pre-wrap" }}
+        >
+          {book.synopsis}
+        </Typography>
+      </Box>
+    </Modal>
   );
 };
 

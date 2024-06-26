@@ -11,6 +11,7 @@ const BackButton = ({ destination = "/" }) => {
           variant="contained"
           startIcon={<ArrowBackIcon />}
           theme={theme}
+          sx={{ margin: "20px" }}
         >
           Back
         </Button>

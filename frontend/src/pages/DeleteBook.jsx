@@ -5,11 +5,31 @@ import BackButton from "../components/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import Button from "@mui/material/Button";
+import { Box, Typography } from "@mui/material";
+import { style } from "../Theme";
+import { useEffect } from "react";
+
 const DeleteBook = () => {
+  const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`https://book-collection-nu.vercel.app/books/${id}`)
+      .then((response) => {
+        setTitle(response.data.title);
+        setLoading(false);
+      })
+      .catch((error) => {
+        alert("an error happened. Please check console");
+        setLoading(false);
+        console.log(error);
+      });
+  }, []);
 
   const handleDeleteBook = () => {
     setLoading(true);
@@ -17,6 +37,7 @@ const DeleteBook = () => {
       .delete(`https://book-collection-nu.vercel.app/books/${id}`)
       .then(() => {
         setLoading(false);
+        setTitle(response.data.title);
         enqueueSnackbar("Book Deleted Succesfully", { variant: "success" });
         navigate("/");
       })
@@ -29,13 +50,21 @@ const DeleteBook = () => {
   };
 
   return (
-    <div className="p-4">
-      <BackButton />
-      <h1 className="text-3xl my-4">Delete Book</h1>
+    <>
+      <div className="flex ">
+        <BackButton />
+        <Typography
+          variant="h5"
+          className="self-center"
+        >
+          Delete Book
+        </Typography>
+      </div>{" "}
       {loading ? <Spinner /> : ""}
-      <div className="flex flex-col items-center shadow-xl rounded-xl w-[600px] p-8 mx-auto">
-        <h3 className="text-2xl mb-6">Are you sure you want to delete this book?</h3>
-
+      <Box sx={style}>
+        <Typography variant="h5">Are you sure you to delete</Typography>
+        <Typography variant="h5">{title}?</Typography>
+        <br />
         <Button
           variant="contained"
           color="error"
@@ -44,8 +73,8 @@ const DeleteBook = () => {
         >
           Yes, Delete it
         </Button>
-      </div>
-    </div>
+      </Box>
+    </>
   );
 };
 

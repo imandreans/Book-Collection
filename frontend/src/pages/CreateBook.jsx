@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { theme } from "../Theme";
+import { Typography } from "@mui/material";
 
 const CreateBook = () => {
   const [title, setTitle] = useState("");
@@ -42,9 +43,16 @@ const CreateBook = () => {
       });
   };
   return (
-    <div className="p-4">
-      <BackButton />
-      <h1 className="text-3xl my-4">Create Book</h1>
+    <>
+      <div className="flex ">
+        <BackButton />
+        <Typography
+          variant="h5"
+          className="self-center"
+        >
+          Create Book
+        </Typography>
+      </div>
       {loading ? <Spinner /> : ""}
       <div className="flex flex-col shadow-xl rounded-xl w-[600px] p-4 mx-auto">
         <Box
@@ -96,7 +104,7 @@ const CreateBook = () => {
           Save
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

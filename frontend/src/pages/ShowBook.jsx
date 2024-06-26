@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import { Box } from "@mui/material";
+import { Typography } from "@mui/material";
+import { style } from "../Theme";
 
 const ShowBook = () => {
   const [book, setBook] = useState({});
@@ -24,13 +27,20 @@ const ShowBook = () => {
   }, []);
 
   return (
-    <div className="p-4">
-      <BackButton />
-      <h1 className="text-3xl my-4">Show Book</h1>
+    <>
+      <div className="flex ">
+        <BackButton />
+        <Typography
+          variant="h5"
+          className="self-center"
+        >
+          Show Book
+        </Typography>
+      </div>
       {loading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col shadow-xl rounded-xl w-fit p-4">
+        <Box sx={style}>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Id: </span>
             <span className="text-xl mr-4 text-gray-500">{book._id}</span>
@@ -51,9 +61,9 @@ const ShowBook = () => {
             <span className="text-xl mr-4 text-gray-500">Last Updated: </span>
             <span className="text-xl mr-4 text-gray-500">{new Date(book.updateAt).toString()}</span>
           </div>
-        </div>
+        </Box>
       )}
-    </div>
+    </>
   );
 };
 
