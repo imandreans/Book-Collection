@@ -2,11 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
 import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import { style } from "../Theme";
-
+import { Skeleton } from "@mui/material";
 const ShowBook = () => {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
@@ -38,7 +37,20 @@ const ShowBook = () => {
         </Typography>
       </div>
       {loading ? (
-        <Spinner />
+        <Box sx={style}>
+          <Skeleton
+            variant="text"
+            animation="wave"
+          />
+          <Skeleton
+            variant="text"
+            animation="wave"
+          />
+          <Skeleton
+            variant="text"
+            animation="wave"
+          />
+        </Box>
       ) : (
         <Box sx={style}>
           <div className="my-4">

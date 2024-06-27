@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import { theme } from "../Theme";
-import { Typography } from "@mui/material";
-
+import { formStyle, theme } from "../Theme";
+import { Skeleton, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+
 const EditBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -59,7 +58,7 @@ const EditBook = () => {
   };
   return (
     <>
-      <div className="flex ">
+      <div className="flex">
         <BackButton />
         <Typography
           variant="h5"
@@ -68,13 +67,43 @@ const EditBook = () => {
           Edit Book
         </Typography>
       </div>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col shadow-xl rounded-xl w-[600px] p-4 mx-auto">
+      {loading ? (
+        <Box sx={formStyle}>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={56}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={56}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={56}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={217}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={42.25}
+            width={286}
+          ></Skeleton>
+        </Box>
+      ) : (
         <Box
           component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
+          sx={formStyle}
           noValidate
           autoComplete="off"
         >
@@ -105,20 +134,20 @@ const EditBook = () => {
             id="outlined-multiline-static"
             label="Synopsis"
             multiline
-            rows={4}
+            rows={8}
             value={synopsis}
             onChange={(e) => setSynopsis(e.target.value)}
           />
+          <Button
+            theme={theme}
+            variant="contained"
+            size="large"
+            onClick={handleEditBook}
+          >
+            Save
+          </Button>
         </Box>
-        <Button
-          theme={theme}
-          variant="contained"
-          size="large"
-          onClick={handleEditBook}
-        >
-          Save
-        </Button>
-      </div>
+      )}
     </>
   );
 };

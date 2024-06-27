@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import Spinner from "../components/Spinner";
 import BackButton from "../components/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
@@ -8,6 +7,7 @@ import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
 import { style } from "../Theme";
 import { useEffect } from "react";
+import { Skeleton } from "@mui/material";
 
 const DeleteBook = () => {
   const [title, setTitle] = useState("");
@@ -60,20 +60,40 @@ const DeleteBook = () => {
           Delete Book
         </Typography>
       </div>{" "}
-      {loading ? <Spinner /> : ""}
-      <Box sx={style}>
-        <Typography variant="h5">Are you sure you to delete</Typography>
-        <Typography variant="h5">{title}?</Typography>
-        <br />
-        <Button
-          variant="contained"
-          color="error"
-          size="large"
-          onClick={handleDeleteBook}
-        >
-          Yes, Delete it
-        </Button>
-      </Box>
+      {loading ? (
+        <Box sx={style}>
+          <Skeleton
+            variant="text"
+            height={32}
+            width={336}
+          ></Skeleton>
+          <Skeleton
+            variant="text"
+            height={32}
+            width={336}
+          ></Skeleton>
+          <br />
+          <Skeleton
+            variant="rectangluar"
+            height={42}
+            width={153}
+          ></Skeleton>
+        </Box>
+      ) : (
+        <Box sx={style}>
+          <Typography variant="h5">Are you sure you to delete</Typography>
+          <Typography variant="h5">{title}?</Typography>
+          <br />
+          <Button
+            variant="contained"
+            color="error"
+            size="large"
+            onClick={handleDeleteBook}
+          >
+            Yes, Delete it
+          </Button>
+        </Box>
+      )}
     </>
   );
 };

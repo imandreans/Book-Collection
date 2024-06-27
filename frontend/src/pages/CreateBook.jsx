@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { theme } from "../Theme";
+import { formStyle, theme } from "../Theme";
 import { Typography } from "@mui/material";
-
+import { Skeleton } from "@mui/material";
 const CreateBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -53,48 +52,79 @@ const CreateBook = () => {
           Create Book
         </Typography>
       </div>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col shadow-xl rounded-xl w-[600px] p-4 mx-auto">
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            required
-            id="outlined-required"
-            label="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="Author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="Year of Publish"
-            type="number"
-            value={publishYear}
-            onChange={(e) => setPublishYear(e.target.value)}
-          />
-          <TextField
-            required
-            id="outlined-multiline-static"
-            label="Description"
-            multiline
-            rows={4}
-            value={synopsis}
-            onChange={(e) => setSynopsis(e.target.value)}
-          />
+      {loading ? (
+        <Box sx={formStyle}>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={56}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={56}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={56}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={217}
+            width={286}
+          ></Skeleton>
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            height={42.25}
+            width={286}
+          ></Skeleton>
         </Box>
+      ) : (
+        ""
+      )}
+      <Box
+        sx={formStyle}
+        component="form"
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          required
+          id="outlined-required"
+          label="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Year of Publish"
+          type="number"
+          value={publishYear}
+          onChange={(e) => setPublishYear(e.target.value)}
+        />
+        <TextField
+          required
+          id="outlined-multiline-static"
+          label="Description"
+          multiline
+          rows={8}
+          value={synopsis}
+          onChange={(e) => setSynopsis(e.target.value)}
+        />
         <Button
           theme={theme}
           variant="contained"
@@ -103,7 +133,7 @@ const CreateBook = () => {
         >
           Save
         </Button>
-      </div>
+      </Box>
     </>
   );
 };
