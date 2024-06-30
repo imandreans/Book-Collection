@@ -15,8 +15,6 @@ export const BookContext = createContext(defaultVal);
 export const BookContextProvider = (props) => {
   const [cookies, setCookies] = useCookies(["access_token"]);
   const [isAuthenticated, setAuthenticated] = useState(false);
-  console.log("auth " + isAuthenticated + " access_token " + cookies.access_token);
-  // console.log(cookies.access_token !== undefined);
 
   useEffect(() => {
     // window.location.reload;
